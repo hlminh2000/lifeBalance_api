@@ -1,18 +1,24 @@
 const express = require("express");
-app = express();
-bodyParser = require("body-parser");
-graphqlExpress = require("graphql-server-express").graphqlExpress;
-graphiqlExpress = require("graphql-server-express").graphiqlExpress;
-schema = require("./schema.js");
-makeExecutableSchema = require("graphql-tools");
-printSchema = require("graphql/utilities/schemaPrinter");
+const app = express();
+const bodyParser = require("body-parser");
+const graphqlExpress = require("graphql-server-express").graphqlExpress;
+const graphiqlExpress = require("graphql-server-express").graphiqlExpress;
+const schema = require("./schema.js");
+const makeExecutableSchema = require("graphql-tools");
+const printSchema = require("graphql/utilities/schemaPrinter");
+const cors = require("cors");
 
 app.get("/", (req, res, next) => {
   res.send("API!!!!");
 });
 
 // /api/graphql
-app.use("/graphql", bodyParser.json(), graphqlExpress({ schema, context: {} }));
+app.use(
+  "/graphql",
+  cors(),
+  bodyParser.json(),
+  graphqlExpress({ schema, context: {} })
+);
 
 // /api/graphiql
 app.use("/graphiql", graphiqlExpress({ endpointURL: "/graphql" }));
