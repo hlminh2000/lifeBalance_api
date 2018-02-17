@@ -1,8 +1,16 @@
-const functions = require('firebase-functions');
+const functions = require("firebase-functions");
+const admin = require("firebase-admin");
+const lambdas = require("./lambdas");
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+const api = require("./api");
+const serviceAccount = require("./serviceAccount.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: `https://${serviceAccount.client_id}.firebaseio.com`
+});
+
+exports.api = functions.https.onRequest(api);
+exports.newUser = functions.auth.user().onCreate(e => {
+  return lambdas.newUser(e.data.uid, admin.database());
+});
