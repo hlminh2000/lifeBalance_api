@@ -7,7 +7,7 @@ const serviceAccount = require("./serviceAccount.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: `https://${serviceAccount.client_id}.firebaseio.com`
+  databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`
 });
 
 exports.api = functions.https.onRequest(api);
