@@ -25,7 +25,7 @@ type UserData {
   uid: String
   name: String
   activities: [ActivityData]
-  activitiesLog(dates: [String]!): [ActivityLog]
+  activitiesLog(dates: [String]): [ActivityLog]
 }
 
 # the schema allows the following query:
