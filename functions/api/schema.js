@@ -2,28 +2,40 @@ const makeExecutableSchema = require("graphql-tools").makeExecutableSchema;
 const resolvers = require("./resolvers.js");
 
 const schema = `
-type Author {
-  id: Int! # the ! means that every author object _must_ have an id
-  firstName: String
-  lastName: String
-  posts: [Post] # the list of Posts by this author
+scalar JSON
+
+type ActivityLog {
+  id: String,
+  activityId: String,
+  timestamp: Int,
+  start: Int,
+  end: Int
 }
-type Post {
-  id: Int!
+
+type ActivityData {
+  id: String
+  icon: String
   title: String
-  author: Author
-  votes: Int
+  createdAt: Int
+  isActive: Boolean
+  isArchived: Boolean
 }
+
+type UserData {
+  uid: String
+  name: String
+  activities: [ActivityData]
+  activitiesLog(dates: [String]!): [ActivityLog]
+}
+
 # the schema allows the following query:
 type Query {
-  posts: [Post]
-  author(id: Int!): Author
+  user(uid: String! session: String!): UserData
 }
+
 # this schema allows the following mutation:
 type Mutation {
-  upvotePost (
-    postId: Int!
-  ): Post
+  something: String
 }
 `;
 
