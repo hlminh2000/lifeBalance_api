@@ -1,5 +1,10 @@
+const database = require("../../services/database");
+
 module.exports = {
   user: (_, { uid, session }) => {
-    return {};
+    return {
+      uid: uid,
+      name: "JOHN"
+    };
   }
 };
