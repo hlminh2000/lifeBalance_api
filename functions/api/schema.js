@@ -1,5 +1,5 @@
 const makeExecutableSchema = require("graphql-tools").makeExecutableSchema;
-const resolvers = require("./resolvers.js");
+const resolvers = require("./resolvers/index.js");
 
 const schema = `
 scalar JSON
