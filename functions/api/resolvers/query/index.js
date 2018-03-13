@@ -6,8 +6,24 @@ module.exports = {
     return {
       uid: uid,
       name: "JOHN",
-      activities: types.ActivityData({ userId: uid }),
-      activitiesLog: [types.ActivityLog({ userId: uid, dates: [] }, {})]
+      activities: ({activityIds}) => activityIds
+        ? activityIds.map(
+            activityId => types.ActivityData({ userId: uid, activityId })
+          )
+        : database.ref(`${uid}/activities`).once('value', snapshot => {
+            const value = snapshot.val()
+            console.log(value)
+            return value 
+              ? value.map(activity => {
+                  return Promise.resolve(types.ActivityData({activity}))
+                }) 
+              : {}
+          }),
+      activitiesLogs: ({dates, activityIds}) => dates
+        .map(date => activityIds.map(activityId => types.ActivityLog({
+          userId: uid, date, activityId
+        })))
+        .reduce((acc, activities) => acc.concat(activities), [])
     };
   }
 };

@@ -8,6 +8,7 @@ const makeExecutableSchema = require("graphql-tools");
 const printSchema = require("graphql/utilities/schemaPrinter");
 const cors = require("cors");
 
+
 app.get("/", (req, res, next) => {
   res.send("API!!!!");
 });
