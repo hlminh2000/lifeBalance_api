@@ -1,16 +1,21 @@
 const databaseService = require('../../services/database.js')
 
 module.exports = {
-  ActivityData: ({ userId, activityId, activity = {} }) => {
-    const { id, icon, title, createdAt, isActive, isArchived } = activity
-    return {
-      id: id || activityId,
-      icon: icon || "some icon",
-      title: title || "some title",
-      createdAt: createdAt || 0,
-      isActive: isActive || true,
-      isArchived: isArchived || false
-    }
+  ActivityData: ({ userId, activityId }) => {
+    return new Promise((resolve, reject) => databaseService
+      .ref(`${userId}/activities/${activityId}`)
+      .once("value", snapShot => {
+        const value = snapShot.val()
+        console.log("activityId: ", activityId)
+        resolve(value ? {
+          id: activityId,
+          icon: value.icon,
+          title: value.title,
+          createdAt: value.createdAt,
+          isActive: value.isActive,
+          isArchived: value.isArchived
+        }:{})
+      }))
   },
   ActivityLog: ({ userId, date, activityId }) => {
     return {
