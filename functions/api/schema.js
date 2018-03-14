@@ -30,7 +30,7 @@ type UserData {
 
 # the schema allows the following query:
 type Query {
-  user(uid: String! session: String!): UserData
+  user(idToken: JSON!): UserData
 }
 
 # this schema allows the following mutation:
