@@ -6,4 +6,11 @@ admin.initializeApp({
   databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`
 });
 
-module.exports = admin.database();
+module.exports = {
+  getPathSnapshotValue: path => 
+    new Promise(resolve => admin
+      .database()
+      .ref(path)
+      .once('value', snapshot => resolve(snapshot.val()))
+    )
+};

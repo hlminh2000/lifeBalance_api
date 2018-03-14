@@ -1,4 +1,3 @@
-const database = require("../../services/database");
 const types = require("../types/index.js");
 
 module.exports = {
@@ -8,6 +7,7 @@ module.exports = {
       name: "JOHN",
       activities: ({activityIds = []}) => activityIds.map(
           activityId => types.ActivityData({ userId: uid, activityId })
+            // .catch(err => Promise.resolve(null))
         ),
       activitiesLogs: ({dates, activityIds}) => dates
         .map(date => activityIds.map(activityId => types.ActivityLog({
