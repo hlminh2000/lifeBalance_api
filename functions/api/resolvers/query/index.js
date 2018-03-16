@@ -6,15 +6,15 @@ module.exports = {
   user: (_, { idToken }) => {
     return new Promise((resolve, reject) => verifyIdToken(idToken)
       .then(uid => resolve({
-        uid: uid,
-        name: "JOHN",
+        uid: uid.uid,
+        name: uid.name,
         activities: ({activityIds = []}) => activityIds
           .map(
-            activityId => types.ActivityData({ userId: uid, activityId })
+            activityId => types.ActivityData({ userId: uid.uid, activityId })
           ),
         activitiesLogs: ({dates, activityIds}) => dates
           .map(date => activityIds.map(activityId => types.ActivityLog({
-            userId: uid, date, activityId
+            userId: uid.uid, date, activityId
           })))
           .reduce((acc, activities) => acc.concat(activities), [])
       }))

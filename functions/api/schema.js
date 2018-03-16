@@ -22,7 +22,7 @@ type ActivityData {
 }
 
 type UserData {
-  uid: String
+  uid: String!
   name: String
   activities(activityIds: [String]): [ActivityData]
   activitiesLogs(dates: [String] activityIds: [String]): [ActivityLog]
@@ -30,7 +30,7 @@ type UserData {
 
 # the schema allows the following query:
 type Query {
-  user(idToken: JSON!): UserData
+  user(idToken: String!): UserData
 }
 
 # this schema allows the following mutation:
