@@ -19,21 +19,26 @@ module.exports = {
           ({
             uid,
             userData: {
-              activities,
-              activityLogs
+              activities = {},
+              activityLogs = {}
             }
           }) => resolve({
             uid: uid.uid,
             name: uid.name,
             metadata: uid,
-            activities: ({activityIds = []}) => activityIds
+            activities: ({
+              activityIds = (Object.keys(activities) || [])
+            }) => activityIds
               .map(
                 activityId => types.ActivityData(
                   { userId: uid.uid, activityId }, 
                   { cachedSet: activities }
                 )
               ),
-            activitiesLogs: ({dates=[], activityIds=[]}) => dates
+            activityLogs: ({
+              dates = (Object.keys(activityLogs) || []), 
+              activityIds = (Object.keys(activities) || [])
+            }) => dates
               .map(
                 date => activityIds.map(activityId => types.ActivityLog(
                   { userId: uid.uid, date, activityId },

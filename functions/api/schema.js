@@ -25,7 +25,7 @@ type UserData {
   uid: String!
   name: String
   activities(activityIds: [String]): [ActivityData]
-  activitiesLogs(dates: [String] activityIds: [String]): [ActivityLog]
+  activityLogs(dates: [String] activityIds: [String]): [ActivityLog]
   metadata: JSON!
 }
 
