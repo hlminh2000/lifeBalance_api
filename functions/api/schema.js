@@ -26,6 +26,7 @@ type UserData {
   name: String
   activities(activityIds: [String]): [ActivityData]
   activitiesLogs(dates: [String] activityIds: [String]): [ActivityLog]
+  metadata: JSON!
 }
 
 # the schema allows the following query:

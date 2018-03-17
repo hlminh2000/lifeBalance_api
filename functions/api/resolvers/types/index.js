@@ -1,21 +1,31 @@
 const getPathSnapshotValue = require('../../services/database.js').getPathSnapshotValue
 
 module.exports = {
-  ActivityData: ({ userId, activityId }) => 
-    getPathSnapshotValue(`users/${userId}/activities/${activityId}`)
-      .then(value => value
+  ActivityData: ({ userId, activityId } = {}, {cachedSet} = {}) => 
+    (
+      cachedSet
+      ? Promise.resolve(cachedSet)
+      : getPathSnapshotValue(`users/${userId}/activities`)
+    )
+      .then((activities = []) => {
+        const activity = activities.find(({id}) => id === activityId)
+        return activity
         ? {
             id: activityId,
-            icon: value.icon,
-            title: value.title,
-            createdAt: value.createdAt,
-            isActive: value.isActive,
-            isArchived: value.isArchived
+            icon: activity.icon,
+            title: activity.title,
+            createdAt: activity.createdAt,
+            isActive: activity.isActive,
+            isArchived: activity.isArchived
           }
         : null
-      ),
-  ActivityLog: ({ userId, date, activityId }) => 
-    getPathSnapshotValue(`users/${userId}/activityLogs/${date}`)
+      }),
+  ActivityLog: ({ userId, date, activityId } = {}, {cachedSet} = {}) => 
+    (
+      cachedSet
+      ? Promise.resolve(cachedSet)
+      : getPathSnapshotValue(`users/${userId}/activityLogs/${date}`)
+    )
       .then(activityLogs => (activityLogs || [])
         .filter(
           log => log.activityId === activityId

@@ -25,6 +25,7 @@ module.exports = {
           }) => resolve({
             uid: uid.uid,
             name: uid.name,
+            metadata: uid,
             activities: ({activityIds = []}) => activityIds
               .map(
                 activityId => types.ActivityData(
@@ -36,7 +37,7 @@ module.exports = {
               .map(
                 date => activityIds.map(activityId => types.ActivityLog(
                   { userId: uid.uid, date, activityId },
-                  { cachedSet: activityLogs}
+                  { cachedSet: activityLogs[date] || []}
                 ))
               )
               .reduce((acc, activities) => acc.concat(activities), []),
