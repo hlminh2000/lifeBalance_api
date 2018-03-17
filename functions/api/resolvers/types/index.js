@@ -1,7 +1,7 @@
 const getPathSnapshotValue = require('../../services/database.js').getPathSnapshotValue
 
 module.exports = {
-  ActivityData: ({ userId, activityId } = {}, {cachedSet} = {}) => 
+  ActivityData: ({ userId, activityId } = {}, {cachedSet} = []) => 
     (
       cachedSet
       ? Promise.resolve(cachedSet)
@@ -20,7 +20,7 @@ module.exports = {
           }
         : null
       }),
-  ActivityLog: ({ userId, date, activityId } = {}, {cachedSet} = {}) => 
+  ActivityLog: ({ userId, date, activityId } = {}, {cachedSet} = []) => 
     (
       cachedSet
       ? Promise.resolve(cachedSet)
@@ -36,7 +36,8 @@ module.exports = {
             activityId: log.activityId,
             timestamp: log.timestamp,
             start: log.start,
-            end: log.end
+            end: log.end,
+            date
           })
         )[0]
       )

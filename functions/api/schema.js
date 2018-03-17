@@ -9,7 +9,8 @@ type ActivityLog {
   activityId: String,
   timestamp: Int,
   start: Int,
-  end: Int
+  end: Int,
+  date: String,
 }
 
 type ActivityData {

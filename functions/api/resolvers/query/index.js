@@ -5,7 +5,12 @@ const getPathSnapshotValue = require('../../services/database.js').getPathSnapsh
 module.exports = {
   user: (_, { idToken }) => {
     return new Promise(
-      (resolve, reject) => verifyIdToken(idToken)
+      (resolve, reject) => 
+        // verifyIdToken(idToken)
+        Promise.resolve({
+          uid: "wUl1x1Vi0mYfF33Qh0gYPj6SGcc2",
+          name: "Minh",
+        })
         .then(
           uid => new Promise(resolve => {
             return getPathSnapshotValue(`users/${uid.uid}`)
@@ -19,7 +24,7 @@ module.exports = {
           ({
             uid,
             userData: {
-              activities = {},
+              activities = [],
               activityLogs = {}
             }
           }) => resolve({
@@ -27,7 +32,7 @@ module.exports = {
             name: uid.name,
             metadata: uid,
             activities: ({
-              activityIds = (Object.keys(activities) || [])
+              activityIds = (activities.map(({id}) => id))
             }) => activityIds
               .map(
                 activityId => types.ActivityData(
@@ -37,7 +42,7 @@ module.exports = {
               ),
             activityLogs: ({
               dates = (Object.keys(activityLogs) || []), 
-              activityIds = (Object.keys(activities) || [])
+              activityIds = (activities.map(({id}) => id))
             }) => dates
               .map(
                 date => activityIds.map(activityId => types.ActivityLog(
@@ -45,7 +50,7 @@ module.exports = {
                   { cachedSet: activityLogs[date] || []}
                 ))
               )
-              .reduce((acc, activities) => acc.concat(activities), []),
+              .reduce((acc, activities) => activities ? acc.concat(activities) : acc, []),
           })
         )
         .catch(err => resolve(null))
