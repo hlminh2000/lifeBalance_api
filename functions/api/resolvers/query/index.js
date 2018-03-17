@@ -29,14 +29,14 @@ module.exports = {
               .map(
                 activityId => types.ActivityData(
                   { userId: uid.uid, activityId }, 
-                  { cachedActivities: activities }
+                  { cachedSet: activities }
                 )
               ),
             activitiesLogs: ({dates=[], activityIds=[]}) => dates
               .map(
                 date => activityIds.map(activityId => types.ActivityLog(
                   { userId: uid.uid, date, activityId },
-                  { cachedActivityLogs: activityLogs}
+                  { cachedSet: activityLogs}
                 ))
               )
               .reduce((acc, activities) => acc.concat(activities), []),
