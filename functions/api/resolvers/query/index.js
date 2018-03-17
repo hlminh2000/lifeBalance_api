@@ -39,14 +39,17 @@ module.exports = {
             activityLogs: ({
               dates = (Object.keys(activityLogs) || []), 
               activityIds = (activities.map(({id}) => id))
-            }) => dates
-              .map(
-                date => activityIds.map(activityId => types.ActivityLog(
-                  { userId: uid.uid, date, activityId },
-                  { cachedSet: activityLogs[date] || []}
-                ))
+            }) => Promise.all(dates
+                .map(
+                  date => activityIds.map(activityId => types.ActivityLog(
+                    { userId: uid.uid, date, activityId },
+                    { cachedSet: activityLogs[date] || []}
+                  ))
+                )
+                .reduce((acc, activities) => acc.concat(activities), [])
+              ).then(
+                result => result.filter(activity => activity)
               )
-              .reduce((acc, activities) => activities ? acc.concat(activities) : acc, []),
           })
         )
         .catch(err => resolve(null))
