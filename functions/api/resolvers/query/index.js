@@ -6,11 +6,7 @@ module.exports = {
   user: (_, { idToken }) => {
     return new Promise(
       (resolve, reject) => 
-        // verifyIdToken(idToken)
-        Promise.resolve({
-          uid: "wUl1x1Vi0mYfF33Qh0gYPj6SGcc2",
-          name: "Minh",
-        })
+        verifyIdToken(idToken)
         .then(
           uid => new Promise(resolve => {
             return getPathSnapshotValue(`users/${uid.uid}`)
@@ -54,21 +50,6 @@ module.exports = {
           })
         )
         .catch(err => resolve(null))
-        
-        // .then(uid => resolve({
-        //   uid: uid.uid,
-        //   name: uid.name,
-        //   activities: ({activityIds = []}) => activityIds
-        //     .map(
-        //       activityId => types.ActivityData({ userId: uid.uid, activityId })
-        //     ),
-        //   activitiesLogs: ({dates=[], activityIds=[]}) => dates
-        //     .map(date => activityIds.map(activityId => types.ActivityLog({
-        //       userId: uid.uid, date, activityId
-        //     })))
-        //     .reduce((acc, activities) => acc.concat(activities), [])
-        // }))
-        // .catch(err => resolve(null))
     )
   }
 };

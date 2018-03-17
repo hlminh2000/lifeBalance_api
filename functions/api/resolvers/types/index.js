@@ -10,7 +10,7 @@ module.exports = {
       .then((activities = []) => {
         const activity = activities.find(({id}) => id === activityId)
         return activity
-        ? {
+        && {
             id: activityId,
             icon: activity.icon,
             title: activity.title,
@@ -18,7 +18,6 @@ module.exports = {
             isActive: activity.isActive,
             isArchived: activity.isArchived
           }
-        : null
       }),
   ActivityLog: ({ userId, date, activityId } = {}, {cachedSet} = []) => 
     (
