@@ -2,7 +2,7 @@ const getPathSnapshotValue = require('../../services/database.js').getPathSnapsh
 
 module.exports = {
   ActivityData: ({ userId, activityId }) => 
-    getPathSnapshotValue(`${userId}/activities/${activityId}`)
+    getPathSnapshotValue(`users/${userId}/activities/${activityId}`)
       .then(value => value
         ? {
             id: activityId,
@@ -15,7 +15,7 @@ module.exports = {
         : null
       ),
   ActivityLog: ({ userId, date, activityId }) => 
-    getPathSnapshotValue(`${userId}/activityLogs/${date}`)
+    getPathSnapshotValue(`users/${userId}/activityLogs/${date}`)
       .then(activityLogs => (activityLogs || [])
         .filter(
           log => log.activityId === activityId
