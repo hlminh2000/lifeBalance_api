@@ -18,6 +18,13 @@ app.use(
   "/graphql",
   cors(),
   bodyParser.json(),
+  (req, res, next) => {
+    console.log("===========================")
+    console.log("query: \n", req.body.query)
+    console.log("variables: \n", req.body.variables)
+    console.log("===========================")
+    next()
+  },
   graphqlExpress({ schema, context: {} })
 );
 
