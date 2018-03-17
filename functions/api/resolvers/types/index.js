@@ -11,13 +11,13 @@ module.exports = {
         const activity = activities.find(({id}) => id === activityId)
         return activity
         && {
-            id: activityId,
-            icon: activity.icon,
-            title: activity.title,
-            createdAt: activity.createdAt,
-            isActive: activity.isActive,
-            isArchived: activity.isArchived
-          }
+          id: activityId,
+          icon: activity.icon,
+          title: activity.title,
+          createdAt: activity.createdAt,
+          isActive: activity.isActive,
+          isArchived: activity.isArchived
+        }
       }),
   ActivityLog: ({ userId, date, activityId } = {}, {cachedSet} = []) => 
     (
