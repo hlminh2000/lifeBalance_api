@@ -23,6 +23,8 @@ module.exports = {
           resolve({
             uid: uid.uid,
             name: uid.name,
+            allActivityIds: activities.map(({ id }) => id),
+            allActiveDates: Object.keys(activityLogs),
             metadata: uid,
             activities: ({ activityIds = activities.map(({ id }) => id) }) =>
               activityIds.map(activityId =>
