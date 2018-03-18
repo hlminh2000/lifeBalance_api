@@ -63,10 +63,12 @@ type Query {
 # this schema allows the following mutation:
 type Mutation {
   something(idToken: String!): String
+
   updateUserActivities(
     idToken: ID!
     activityData: [ActivityDataInput]!
   ): [ActivityData]
+
   udateUserActivityLogs(
     idToken: ID!
     activityLogs: [ActivityLogInput]!
