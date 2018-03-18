@@ -3,6 +3,7 @@ const resolvers = require("./resolvers/index.js");
 
 const schema = `
 scalar JSON
+scalar ID
 
 type ActivityLog {
   id: String,
@@ -23,7 +24,7 @@ type ActivityData {
 }
 
 type UserData {
-  uid: String!
+  uid: ID!
   name: String
   activities(activityIds: [String]): [ActivityData]
   activityLogs(dates: [String] activityIds: [String]): [ActivityLog]
@@ -32,12 +33,24 @@ type UserData {
 
 # the schema allows the following query:
 type Query {
-  user(idToken: String!): UserData
+  user(idToken: ID!): UserData
 }
 
 # this schema allows the following mutation:
 type Mutation {
-  something: String
+  something(idToken: String!): String
+  ${
+    ""
+    // updateUserActivities(
+    //   idToken: String!
+    //   activityData: [ActivityData]!
+    // ): [ActivityData]
+    // udateUserActivityLogs(
+    //   idToken: String!
+    //   activityLogs: [ActivityLog]!
+    //   date: String!
+    // ): [ActivityLog]
+  }
 }
 `;
 

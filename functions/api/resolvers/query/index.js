@@ -5,6 +5,7 @@ const getPathSnapshotValue = require("../../services/database.js")
 
 module.exports = {
   user: (_, { idToken }) => {
+    console.log("idToken: ", idToken);
     return new Promise((resolve, reject) =>
       verifyIdToken(idToken)
         .then(
