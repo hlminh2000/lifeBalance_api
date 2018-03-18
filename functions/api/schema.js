@@ -57,7 +57,7 @@ input ActivityDataInput {
 const rootSchema = `
 # the schema allows the following query:
 type Query {
-  user(idToken: ID!): UserData
+  user(idToken: String!): UserData
 }
 
 # this schema allows the following mutation:
