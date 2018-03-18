@@ -8,7 +8,6 @@ const makeExecutableSchema = require("graphql-tools");
 const printSchema = require("graphql/utilities/schemaPrinter");
 const cors = require("cors");
 
-
 app.get("/", (req, res, next) => {
   res.send("API!!!!");
 });
@@ -19,11 +18,11 @@ app.use(
   cors(),
   bodyParser.json(),
   (req, res, next) => {
-    console.log("===========================")
-    console.log("query: \n", req.body.query)
-    console.log("variables: \n", req.body.variables)
-    console.log("===========================")
-    next()
+    console.log("===========================");
+    console.log("query: \n", req.body.query);
+    console.log("variables: \n", req.body.variables);
+    console.log("===========================");
+    next();
   },
   graphqlExpress({ schema, context: {} })
 );
