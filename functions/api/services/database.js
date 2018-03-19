@@ -7,5 +7,12 @@ module.exports = {
         .database()
         .ref(path)
         .once("value", snapshot => resolve(snapshot.val()))
+    ),
+  putValueToPath: (path, value) =>
+    new Promise((resolve, reject) =>
+      admin
+        .database()
+        .ref(path)
+        .set(value)
     )
 };
