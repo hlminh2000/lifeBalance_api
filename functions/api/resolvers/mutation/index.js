@@ -7,11 +7,16 @@ module.exports = {
   something: (_, { idToken }) => {
     return idToken;
   },
-  updateUserActivities: (_, { idToken, activityData } = {}) => {
-    return [];
-  },
-  udateUserActivityLogs: (_, { idToken, activityLogs, date } = {}) => {
-    console.log(idToken, activityLogs, date);
-    return [];
-  }
+  updateUserActivities: (_, { idToken, activityData } = {}) =>
+    new Promise((resolve, reject) =>
+      verifyIdToken(idToken)
+        .then(() => resolve([]))
+        .catch(err => resolve(null))
+    ),
+  udateUserActivityLogs: (_, { idToken, activityLogs, date } = {}) =>
+    new Promise((resolve, reject) =>
+      verifyIdToken(idToken)
+        .then(() => resolve([]))
+        .catch(err => resolve(null))
+    )
 };
