@@ -37,20 +37,20 @@ type UserData {
 const inputTypes = `
 input ActivityLogInput {
   id: ID!
-  activityId: String
-  timestamp: Int
-  start: Int
-  end: Int
-  date: String
+  activityId: String!
+  timestamp: Int!
+  start: Int!
+  end: Int!
+  date: String!
 }
 
 input ActivityDataInput {
   id: ID!
-  icon: String
-  title: String
-  createdAt: Int
-  isActive: Boolean
-  isArchived: Boolean
+  icon: String!
+  title: String!
+  createdAt: Int!
+  isActive: Boolean!
+  isArchived: Boolean!
 }
 `;
 
