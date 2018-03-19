@@ -13,7 +13,7 @@ module.exports = {
         .then(() => resolve([]))
         .catch(err => resolve(null))
     ),
-  udateUserActivityLogs: (_, { idToken, activityLogs, date } = {}) =>
+  updateUserActivityLogs: (_, { idToken, activityLogs, date } = {}) =>
     new Promise((resolve, reject) =>
       verifyIdToken(idToken)
         .then(() => resolve([]))

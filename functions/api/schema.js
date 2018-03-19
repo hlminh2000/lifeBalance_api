@@ -69,7 +69,7 @@ type Mutation {
     activityData: [ActivityDataInput]!
   ): [ActivityData]
 
-  udateUserActivityLogs(
+  updateUserActivityLogs(
     idToken: ID!
     activityLogs: [ActivityLogInput]!
     date: String!
