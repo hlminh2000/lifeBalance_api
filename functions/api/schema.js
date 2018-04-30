@@ -8,7 +8,7 @@ scalar ID
 type ActivityLog {
   id: ID!
   activityId: String
-  timestamp: Int
+  timestamp: Long
   start: Int
   end: Int
   date: String
@@ -38,7 +38,7 @@ const inputTypes = `
 input ActivityLogInput {
   id: ID!
   activityId: String!
-  timestamp: Int!
+  timestamp: Long!
   start: Int!
   end: Int!
   date: String!
