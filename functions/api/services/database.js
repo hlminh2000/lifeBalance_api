@@ -9,10 +9,8 @@ module.exports = {
         .once("value", snapshot => resolve(snapshot.val()))
     ),
   putValueToPath: (path, value) =>
-    new Promise((resolve, reject) =>
-      admin
-        .database()
-        .ref(path)
-        .set(value)
-    )
+    admin
+      .database()
+      .ref(path)
+      .set(value)
 };
