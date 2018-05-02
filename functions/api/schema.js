@@ -9,8 +9,8 @@ type ActivityLog {
   id: ID!
   activityId: String
   timestamp: Float
-  start: Int
-  end: Int
+  start: Float
+  end: Float
   date: String
 }
 
@@ -39,8 +39,8 @@ input ActivityLogInput {
   id: ID!
   activityId: String!
   timestamp: Float!
-  start: Int!
-  end: Int!
+  start: Float!
+  end: Float!
   date: String!
 }
 
