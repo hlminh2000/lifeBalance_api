@@ -18,7 +18,7 @@ type ActivityData {
   id: ID!
   icon: String
   title: String
-  createdAt: Int
+  createdAt: Float
   isActive: Boolean
   isArchived: Boolean
 }
