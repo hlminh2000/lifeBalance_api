@@ -30,6 +30,7 @@ type UserData {
   allActiveDates: [String]
   activities(activityIds: [String]): [ActivityData]
   activityLogs(dates: [String] activityIds: [String]): [ActivityLog]
+  clientTimestamp: Float!
   metadata: JSON!
 }
 `;
@@ -66,11 +67,13 @@ type Mutation {
 
   updateUserActivities(
     idToken: ID!
+    clientTimestamp: Float!
     activityData: [ActivityDataInput]!
   ): [ActivityData]
 
   updateUserActivityLogs(
     idToken: ID!
+    clientTimestamp: Float!
     activityLogs: [ActivityLogInput]!
     date: String!
   ): [ActivityLog]
