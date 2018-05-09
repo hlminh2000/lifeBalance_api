@@ -15,7 +15,7 @@ module.exports = {
           putValueToPath(`users/${uid}/clientTimestamp`, clientTimestamp);
           return putValueToPath(`users/${uid}/activities`, activityData)
             .then(() => getPathSnapshotValue(`users/${uid}/activities`))
-            .then(activities => resolve(activities));
+            .then(resolve);
         })
         .catch(err => resolve(null))
     ),
